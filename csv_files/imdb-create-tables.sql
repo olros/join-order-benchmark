@@ -2,6 +2,7 @@ SET GLOBAL local_infile=1;
 DROP DATABASE IF EXISTS imdbload;
 CREATE DATABASE imdbload;
 USE imdbload;
+
 CREATE TABLE aka_name (
     id integer NOT NULL PRIMARY KEY,
     person_id integer NOT NULL,

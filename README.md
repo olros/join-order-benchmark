@@ -19,13 +19,27 @@ tar -xvzf imdb.tgz
 ```
 
 2. Launch the database server.
-3. Run the script:
+3. Create IMDb tables in MySQL:
+
+```sqlmysql
+mysql> SOURCE /Users/olafrosendahl/Documents/GitHub/join-order-benchmark/csv_files/imdb-create-tables.sql
 ```
-./load_data.sh
+
+4. Load data using this script in MySQL, 1-by-1 to avoid a corrupt database if errors happen.
+```sqlmysql
+mysql> SOURCE /Users/olafrosendahl/Documents/GitHub/join-order-benchmark/csv_files/imdb-load-data-1.sql
+mysql> SOURCE /Users/olafrosendahl/Documents/GitHub/join-order-benchmark/csv_files/imdb-load-data-2.sql
+mysql> SOURCE /Users/olafrosendahl/Documents/GitHub/join-order-benchmark/csv_files/imdb-load-data-3.sql
+mysql> SOURCE /Users/olafrosendahl/Documents/GitHub/join-order-benchmark/csv_files/imdb-load-data-4.sql
+mysql> SOURCE /Users/olafrosendahl/Documents/GitHub/join-order-benchmark/csv_files/imdb-load-data-5.sql
 ```
-If you encounter any access restrictions, please modify the configuration as follows:
-```
-mysql --local-infile=1 -h 127.0.0.1 -P 4000 -u root -D imdbload < $sql_file
+
+Copy the data-directory between each command to allow rollback if errors occur. The data-directory to make a copy of is:
+`/build/mysql-test/var/mysqld.1/data`
+
+5. Add indexes to the IMDb database in MySQL
+```sqlmysql
+mysql> SOURCE /Users/olafrosendahl/Documents/GitHub/join-order-benchmark/csv_files/imdb-index-tables.sql
 ```
 
 ## Order Problem

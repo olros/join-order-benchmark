@@ -17,8 +17,8 @@ load_data() {
   CURDIR=$(cd `dirname $0`; pwd)
   PREFIX=$CURDIR/csv_files/
   
-  ~/Documents/GitHub/mysql-server/build/bin/mysql --local-infile=1 -u root -S /Users/olafrosendahl/Documents/GitHub/mysql-server/build/mysql-test/var/tmp/mysqld.1.sock -D imdbload < $PREFIX/schematext.sql
-  ~/Documents/GitHub/mysql-server/build/bin/mysql --local-infile=1 -u root -S /Users/olafrosendahl/Documents/GitHub/mysql-server/build/mysql-test/var/tmp/mysqld.1.sock -D imdbload < $PREFIX/fkindexes.sql
+  # ~/Documents/GitHub/mysql-server/build/bin/mysql --local-infile=1 -u root -S /Users/olafrosendahl/Documents/GitHub/mysql-server/build/mysql-test/var/tmp/mysqld.1.sock -D imdbload < $PREFIX/schematext.sql
+  # ~/Documents/GitHub/mysql-server/build/bin/mysql --local-infile=1 -u root -S /Users/olafrosendahl/Documents/GitHub/mysql-server/build/mysql-test/var/tmp/mysqld.1.sock -D imdbload < $PREFIX/fkindexes.sql
   
   for csv_file in `ls $CURDIR/csv_files/*.csv`; do
     read -u1000
@@ -30,8 +30,7 @@ load_data() {
     echo $sql > $sql_file
     echo $sql_file
     {
-       ~/Documents/GitHub/mysql-server/build/bin/mysql --local-infile=1 -u root -S /Users/olafrosendahl/Documents/GitHub/mysql-server/build/mysql-test/var/tmp/mysqld.1.sock -D imdbload < $sql_file
-        #  mysql -h 127.0.0.1 -u root -p123456 -D imdbload < $sql_file
+      #  ~/Documents/GitHub/mysql-server/build/bin/mysql --local-infile=1 -u root -S /Users/olafrosendahl/Documents/GitHub/mysql-server/build/mysql-test/var/tmp/mysqld.1.sock -D imdbload < $sql_file
        echo >&1000
     }& 
   done
