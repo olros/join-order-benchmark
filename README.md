@@ -1,13 +1,13 @@
 # Join-Order-Benchmark
 
+> Based on [https://github.com/winkyao/join-order-benchmark](https://github.com/winkyao/join-order-benchmark)
+
 This package contains the Join Order Benchmark (JOB) queries from:
 "[How Good Are Query Optimizers, Really?](http://www.vldb.org/pvldb/vol9/p204-leis.pdf)"
 by Viktor Leis, Andrey Gubichev, Atans Mirchev, Peter Boncz, Alfons Kemper, Thomas Neumann
 PVLDB Volume 9, No. 3, 2015
 
-
 The `csv_files/imdb-create-tables.sql` and `queries/*.sql` are modified to MySQL syntax.
-
 
 ## Quick Start
 
@@ -42,7 +42,7 @@ Copy the data-directory between each command to allow rollback if an error occur
 mysql> SOURCE /Users/olafrosendahl/Documents/GitHub/join-order-benchmark/csv_files/imdb-index-tables.sql
 ```
 
-## Run queries
+## Running the queries
 
 We use [hyperfine](https://github.com/sharkdp/hyperfine) as a benchmarking-tool to measure the queries, you'll therefore need to install it before running the queries. To run all queries, run the following in your terminal:
 
@@ -52,6 +52,6 @@ $ ./run_queries.sh
 
 This will run the queries in the [queries-folder](./queries/) one-by-one, both with and without re-optimization, and output the results into the [results-folder](./results/) as both markdown and json-files for each query. You'll be able to see the progress in the terminal as the queries are being executed.
 
-## Order Problem
+### Order Problem
 
 Please note that `queries/17b.sql` and `queries/8d.sql` may exhibit order issues due to the use of different order rules from MySQL. This is not a real bug.
