@@ -14,12 +14,10 @@ mysql_connect="~/Documents/GitHub/mysql-server/build/bin/mysql -u root -S /Users
 
 
 for file in `ls queries/*.sql`; do
-  file="queries/11a.sql"
   bname=`basename $file`
   name=${bname%.*}
-  # outputfile=$OUTDIR/$name.out
-  outputfile=$OUTDIR/$name.md
-  errorfile=$OUTDIR/$name.err
+  outputmarkdown=$OUTDIR/$name.md
+  outputjson=$OUTDIR/$name.json
   echo "Run $file"
 
   export query=$(<$file)
@@ -39,6 +37,5 @@ eof
 }
   export -f without_reoptimization
   export -f with_reoptimization
-  # hyperfine -r 10 --shell=bash without_reoptimization with_reoptimization > $outputfile
-  hyperfine --warmup 2 -r 5 --export-markdown $outputfile --shell=bash without_reoptimization with_reoptimization
+  hyperfine --show-output --warmup 2 -r 5 --export-json $outputjson --export-markdown $outputmarkdown --shell=bash without_reoptimization with_reoptimization
 done
