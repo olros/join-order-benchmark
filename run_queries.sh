@@ -2,7 +2,7 @@
 set -e
 
 CURDIR=$(cd `dirname $0`; pwd)
-OUTDIR=$CURDIR/results/tests/$1
+OUTDIR=$CURDIR/results/tests/
 
 if [ ! -e $OUTDIR ]; then
   mkdir -p $OUTDIR
