@@ -51,30 +51,29 @@ ANALYZE TABLE role_type;
 ANALYZE TABLE title;
 eof"
 
-for file in `ls queries/*.sql`; do
-  bname=`basename $file`
-  name=${bname%.*}
-  outputmarkdown=$OUTDIR/$name.md
-  outputjson=$OUTDIR/$name.json
-  echo "Run $file"
+file="queries/${1:-"1a"}.sql"
+bname=`basename $file`
+name=${bname%.*}
+outputmarkdown=$OUTDIR/$name.md
+outputjson=$OUTDIR/$name.json
+echo "Run $file"
 
-  original_query=$(<$file)
-  export query=${original_query/";"/"\G"}
-  export query_without_reoptimization=${query/"SELECT "/"SELECT /*+ SET_VAR(sql_buffer_result=1) */ "}
-  export query_with_reoptimization=${query/"SELECT "/"SELECT /*+ SET_VAR(sql_buffer_result=1) RUN_REOPT */ "}
+original_query=$(<$file)
+export query=${original_query/";"/"\G"}
+export query_without_reoptimization=${query/"SELECT "/"SELECT /*+ SET_VAR(sql_buffer_result=1) */ "}
+export query_with_reoptimization=${query/"SELECT "/"SELECT /*+ SET_VAR(sql_buffer_result=1) RUN_REOPT */ "}
 
-  function without_reoptimization {
-    eval "$mysql_connect<<eof
+function without_reoptimization {
+  eval "$mysql_connect<<eof
 $query_without_reoptimization
 eof"
 }
-  function with_reoptimization {
-    eval "$mysql_connect<<eof
+function with_reoptimization {
+  eval "$mysql_connect<<eof
 $query_with_reoptimization
 eof"
 }
-  export -f without_reoptimization
-  export -f with_reoptimization
+export -f without_reoptimization
+export -f with_reoptimization
 
-  hyperfine --prepare "eval $analyze" --warmup 2 -r 10 --export-json $outputjson --export-markdown $outputmarkdown --shell=bash without_reoptimization with_reoptimization
-done
+hyperfine --prepare "eval $analyze" --warmup 0 -r 10 --export-json $outputjson --export-markdown $outputmarkdown --shell=bash without_reoptimization with_reoptimization

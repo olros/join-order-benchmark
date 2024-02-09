@@ -1,3 +1,5 @@
 csv_files/**.csv
 csv_files/**.tgz
 .DS_Store
+
+/results/tests
