@@ -22,7 +22,6 @@ FLUSH OPTIMIZER_COSTS;
 
 SET PERSIST innodb_stats_persistent = 1;
 SET PERSIST innodb_stats_auto_recalc = 0;
--- SET PERSIST innodb_stats_persistent = 0;
 
 SET GLOBAL optimizer_switch='hypergraph_optimizer=on';
 eof"
