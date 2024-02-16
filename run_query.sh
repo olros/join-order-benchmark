@@ -55,24 +55,23 @@ bname=`basename $file`
 name=${bname%.*}
 outputmarkdown=$OUTDIR/$name.md
 outputjson=$OUTDIR/$name.json
-echo "Run $file"
+
+NC='\033[0m' 
+BIWhite='\033[1;97m'
+echo -e "${BIWhite}+-------------+${NC}"
+echo -e "${BIWhite}| Run $name.sql |${NC}"
+echo -e "${BIWhite}+-------------+${NC}"
 
 original_query=$(<$file)
-export query=${original_query/";"/"\G"}
-export query_without_reoptimization=${query/"SELECT "/"SELECT /*+ SET_VAR(sql_buffer_result=1) */ "}
-export query_with_reoptimization=${query/"SELECT "/"SELECT /*+ SET_VAR(sql_buffer_result=1) RUN_REOPT */ "}
+query=${original_query/";"/"\G"}
+query_without_reoptimization=${query/"SELECT "/"SELECT /*+ SET_VAR(sql_buffer_result=1) */ "}
+query_with_reoptimization=${query/"SELECT "/"SELECT /*+ SET_VAR(sql_buffer_result=1) RUN_REOPT */ "}
 
-function without_reoptimization {
-  eval "$mysql_connect<<eof
-$query_without_reoptimization
-eof"
-}
-function with_reoptimization {
-  eval "$mysql_connect<<eof
-$query_with_reoptimization
-eof"
-}
-export -f without_reoptimization
-export -f with_reoptimization
-
-hyperfine --prepare "eval $analyze" --warmup 0 -r 10 --export-json $outputjson --export-markdown $outputmarkdown --shell=bash without_reoptimization with_reoptimization
+hyperfine \
+  --prepare "eval $analyze" \
+  --warmup 2 \
+  -r 10 \
+  --export-json $outputjson \
+  --export-markdown $outputmarkdown \
+  -n "without_reoptimization" "$mysql_connect -e \"$query_without_reoptimization\"" \
+  -n "with_reoptimization" "$mysql_connect -e \"$query_with_reoptimization\""
