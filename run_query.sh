@@ -62,10 +62,13 @@ echo -e "${BIWhite}+-------------+${NC}"
 echo -e "${BIWhite}| Run $name.sql |${NC}"
 echo -e "${BIWhite}+-------------+${NC}"
 
+BELOW_THRESHOLD=64
+ABOVE_THRESHOLD=32
+
 original_query=$(<$file)
 query=${original_query/";"/"\G"}
 query_without_reoptimization=${query/"SELECT "/"SELECT /*+ SET_VAR(sql_buffer_result=1) */ "}
-query_with_reoptimization=${query/"SELECT "/"SELECT /*+ SET_VAR(sql_buffer_result=1) RUN_REOPT */ "}
+query_with_reoptimization=${query/"SELECT "/"SELECT /*+ SET_VAR(sql_buffer_result=1) RUN_REOPT($BELOW_THRESHOLD, $ABOVE_THRESHOLD) */ "}
 
 hyperfine \
   --prepare "eval $analyze" \

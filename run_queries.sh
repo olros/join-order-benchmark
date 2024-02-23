@@ -10,6 +10,9 @@ fi
 
 cd $CURDIR
 
+NC='\033[0m' 
+BIWhite='\033[1;97m'
+
 mysql_client="~/Documents/GitHub/mysql-server/build-release/bin/mysql"
 mysql_sock="/Users/olafrosendahl/Documents/GitHub/mysql-server/build-release/mysql-test/var/tmp/mysqld.1.sock"
 
@@ -50,28 +53,47 @@ ANALYZE TABLE role_type;
 ANALYZE TABLE title;
 eof"
 
-for file in `ls queries/*.sql`; do
-  bname=`basename $file`
-  name=${bname%.*}
-  outputmarkdown=$OUTDIR/$name.md
-  outputjson=$OUTDIR/$name.json
-  NC='\033[0m' 
-  BIWhite='\033[1;97m'
-  echo -e "${BIWhite}+-------------+${NC}"
-  echo -e "${BIWhite}| Run $name.sql |${NC}"
-  echo -e "${BIWhite}+-------------+${NC}"
+thresholds=("16" "24" "32" "40" "48")
 
-  original_query=$(<$file)
-  query=${original_query/";"/"\G"}
-  query_without_reoptimization=${query/"SELECT "/"SELECT /*+ SET_VAR(sql_buffer_result=1) */ "}
-  query_with_reoptimization=${query/"SELECT "/"SELECT /*+ SET_VAR(sql_buffer_result=1) RUN_REOPT */ "}
+threshold_pairs=()
 
-  hyperfine \
-    --prepare "eval $analyze" \
-    --warmup 2 \
-    -r 10 \
-    --export-json $outputjson \
-    --export-markdown $outputmarkdown \
-    -n "without_reoptimization" "$mysql_connect -e \"$query_without_reoptimization\"" \
-    -n "with_reoptimization" "$mysql_connect -e \"$query_with_reoptimization\""
+for threshold_below in "${thresholds[@]}"; do
+  for threshold_above in "${thresholds[@]}"; do
+    threshold_pairs+=("$threshold_below $threshold_above")
+  done
+done
+
+for threshold in "${threshold_pairs[@]}"; do
+  read -r below above <<< "$threshold"
+  echo -e "${BIWhite}Starting benchmarking with thresholds: below: $below, above: $above${NC}"
+
+  output_folder="${OUTDIR}below_${below}_above_${above}/"
+
+  if [ ! -e $output_folder ]; then
+    mkdir -p $output_folder
+  fi
+
+  for file in `ls queries/*.sql`; do
+    bname=`basename $file`
+    name=${bname%.*}
+    outputmarkdown=$output_folder/$name.md
+    outputjson=$output_folder/$name.json
+    echo -e "${BIWhite}+-------------+${NC}"
+    echo -e "${BIWhite}| Run $name.sql |${NC}"
+    echo -e "${BIWhite}+-------------+${NC}"
+
+    original_query=$(<$file)
+    query=${original_query/";"/"\G"}
+    query_without_reoptimization=${query/"SELECT "/"SELECT /*+ SET_VAR(sql_buffer_result=1) */ "}
+    query_with_reoptimization=${query/"SELECT "/"SELECT /*+ SET_VAR(sql_buffer_result=1) RUN_REOPT($below, $above) */ "}
+
+    hyperfine \
+      --prepare "eval $analyze" \
+      --warmup 2 \
+      -r 20 \
+      --export-json $outputjson \
+      --export-markdown $outputmarkdown \
+      -n "without_reoptimization" "$mysql_connect -e \"$query_without_reoptimization\"" \
+      -n "with_reoptimization" "$mysql_connect -e \"$query_with_reoptimization\""
+  done
 done
