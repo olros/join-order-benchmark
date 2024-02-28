@@ -1,0 +1,14 @@
+cff-version: 1.2.0
+title: Join Order Benchmark
+message: >-
+  If you use this software in scientific
+  publications, please consider citing it using the
+  metadata from this file.
+type: software
+authors:
+  - given-names: Olaf
+    family-names: Rosendahl
+    email: olafrosendahl@gmail.com
+repository-code: 'https://github.com/olros/join-order-benchmark'
+abstract: The Join Order Benchmark in MySQL with scripts for running the benchmark.
+license: MIT
