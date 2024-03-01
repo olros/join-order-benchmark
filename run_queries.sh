@@ -57,6 +57,8 @@ thresholds=("16" "24" "32" "40" "48")
 
 threshold_pairs=()
 
+threshold_pairs+=("-1 -1") # Mapped to run without re-optimization
+
 for threshold_below in "${thresholds[@]}"; do
   for threshold_above in "${thresholds[@]}"; do
     threshold_pairs+=("$threshold_below $threshold_above")
@@ -65,9 +67,17 @@ done
 
 for threshold in "${threshold_pairs[@]}"; do
   read -r below above <<< "$threshold"
-  echo -e "${BIWhite}Starting benchmarking with thresholds: below: $below, above: $above${NC}"
 
-  output_folder="${OUTDIR}below_${below}_above_${above}/"
+  if [ $below -eq "-1" ] && [ $above -eq "-1" ]
+  then
+    echo -e "${BIWhite}Starting benchmarking for baseline${NC}"
+    run_reopt=false
+    output_folder="${OUTDIR}baseline/"
+  else
+    echo -e "${BIWhite}Starting benchmarking with thresholds: below: $below, above: $above${NC}"
+    run_reopt=true
+    output_folder="${OUTDIR}below_${below}_above_${above}/"
+  fi
 
   if [ ! -e $output_folder ]; then
     mkdir -p $output_folder
@@ -84,16 +94,25 @@ for threshold in "${threshold_pairs[@]}"; do
 
     original_query=$(<$file)
     query=${original_query/";"/"\G"}
-    query_without_reoptimization=${query/"SELECT "/"SELECT /*+ SET_VAR(sql_buffer_result=1) */ "}
-    query_with_reoptimization=${query/"SELECT "/"SELECT /*+ SET_VAR(sql_buffer_result=1) RUN_REOPT($below, $above) */ "}
+    if [ $run_reopt == true ]
+    then
+      query=${query/"SELECT "/"SELECT /*+ SET_VAR(sql_buffer_result=1) RUN_REOPT($below, $above) */ "}
+    else
+      query=${query/"SELECT "/"SELECT /*+ SET_VAR(sql_buffer_result=1) */ "}
+    fi
+
+    if [ -s "$outputjson" ]
+    then
+      echo "Results for $name already collected, skipping..."
+      continue
+    fi
 
     hyperfine \
       --prepare "eval $analyze" \
       --warmup 2 \
-      -r 20 \
+      -r 10 \
       --export-json $outputjson \
       --export-markdown $outputmarkdown \
-      -n "without_reoptimization" "$mysql_connect -e \"$query_without_reoptimization\"" \
-      -n "with_reoptimization" "$mysql_connect -e \"$query_with_reoptimization\""
+      -n "job" "$mysql_connect -e \"$query\""
   done
 done
