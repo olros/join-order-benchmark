@@ -18,40 +18,50 @@ wget http://homepages.cwi.nl/~boncz/job/imdb.tgz
 tar -xvzf imdb.tgz
 ```
 
-2. Launch the database server and connect
-3. Create IMDb tables in MySQL:
+1. Launch the database server and connect (with local-infile turned on in the database server)
+2. Create IMDb tables in MySQL:
 
 ```sqlmysql
 mysql> SOURCE /Users/olafrosendahl/Documents/GitHub/join-order-benchmark/csv_files/imdb-create-tables.sql
 ```
 
-4. Load data in MySQL, one-by-one to allow recovery if an error happens and corrupts database.
+4. Load data in MySQL:
 ```sqlmysql
-mysql> SOURCE /Users/olafrosendahl/Documents/GitHub/join-order-benchmark/csv_files/imdb-load-data-1.sql
-mysql> SOURCE /Users/olafrosendahl/Documents/GitHub/join-order-benchmark/csv_files/imdb-load-data-2.sql
-mysql> SOURCE /Users/olafrosendahl/Documents/GitHub/join-order-benchmark/csv_files/imdb-load-data-3.sql
-mysql> SOURCE /Users/olafrosendahl/Documents/GitHub/join-order-benchmark/csv_files/imdb-load-data-4.sql
-mysql> SOURCE /Users/olafrosendahl/Documents/GitHub/join-order-benchmark/csv_files/imdb-load-data-5.sql
+mysql> SOURCE /Users/olafrosendahl/Documents/GitHub/join-order-benchmark/csv_files/imdb-load-data.sql
 ```
-
-Copy the data-directory between each command to allow rollback if an error occur. The data-directory to make a copy of is:
-`/build/mysql-test/var/mysqld.1/data`
 
 5. Add indexes to the IMDb database in MySQL
 ```sqlmysql
 mysql> SOURCE /Users/olafrosendahl/Documents/GitHub/join-order-benchmark/csv_files/imdb-index-tables.sql
 ```
 
+Copy the data-directory afterwards to allow restoring the database data without loading it again if necessary. The data-directory to make a copy of is:
+`/build/mysql-test/var/mysqld.1/data`
+
 ## Running the queries
 
 We use [hyperfine](https://github.com/sharkdp/hyperfine) as a benchmarking-tool to measure the queries, you'll therefore need to install it before running the queries. To run all queries, run the following in your terminal:
 
 ```bash
-$ ./run_queries.sh
+./run_queries.sh
 ```
 
-This will run the queries in the [queries-folder](./queries/) one-by-one, both with and without re-optimization, and output the results into the [results-folder](./results/) as both markdown and json-files for each query. You'll be able to see the progress in the terminal as the queries are being executed.
+This will run the queries in the [queries-folder](./queries/) one-by-one, first without re-optimization, and then with re-optimization using different variables for the re-optimization hint. The results are outputted to different folders in the [results-folder](./results/tests/) as json-files for each query. You'll be able to see the progress in the terminal as the queries are being executed.
+
+### Run single query
+
+You can also run a single query without and with re-optimization by running the following in your terminal, replace `<query>` with the name of the query you want to run:
+
+```sh
+./run_query.sh <query>
+```
+
+The result wil be outputted to a file in the [results-folder](./results/tests/) as a json-file and will also be visible in the terminal.
 
 ### Order Problem
 
 Please note that `queries/17b.sql` and `queries/8d.sql` may exhibit order issues due to the use of different order rules from MySQL. This is not a real bug.
+
+## Analyze results
+
+We've created a Python-script with lots of different methods for visualizing the results in [`visulize-info.py`](./visulize-info.py). Open it to chose which results you want visualized and before running it.

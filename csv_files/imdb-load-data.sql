@@ -1,5 +1,11 @@
 SET GLOBAL local_infile = 1;
 
+LOAD DATA LOCAL INFILE '/Users/olafrosendahl/Documents/GitHub/join-order-benchmark/csv_files/aka_name.csv' INTO TABLE aka_name FIELDS TERMINATED BY ',';
+
+LOAD DATA LOCAL INFILE '/Users/olafrosendahl/Documents/GitHub/join-order-benchmark/csv_files/aka_title.csv' INTO TABLE aka_title FIELDS TERMINATED BY ',';
+
+LOAD DATA LOCAL INFILE '/Users/olafrosendahl/Documents/GitHub/join-order-benchmark/csv_files/cast_info.csv' INTO TABLE cast_info FIELDS TERMINATED BY ',';
+
 LOAD DATA LOCAL INFILE '/Users/olafrosendahl/Documents/GitHub/join-order-benchmark/csv_files/char_name.csv' INTO TABLE char_name FIELDS TERMINATED BY ',';
 
 LOAD DATA LOCAL INFILE '/Users/olafrosendahl/Documents/GitHub/join-order-benchmark/csv_files/comp_cast_type.csv' INTO TABLE comp_cast_type FIELDS TERMINATED BY ',';
@@ -21,3 +27,17 @@ LOAD DATA LOCAL INFILE '/Users/olafrosendahl/Documents/GitHub/join-order-benchma
 LOAD DATA LOCAL INFILE '/Users/olafrosendahl/Documents/GitHub/join-order-benchmark/csv_files/movie_companies.csv' INTO TABLE movie_companies FIELDS TERMINATED BY ',';
 
 LOAD DATA LOCAL INFILE '/Users/olafrosendahl/Documents/GitHub/join-order-benchmark/csv_files/movie_info_idx.csv' INTO TABLE movie_info_idx FIELDS TERMINATED BY ',';
+
+LOAD DATA LOCAL INFILE '/Users/olafrosendahl/Documents/GitHub/join-order-benchmark/csv_files/movie_keyword.csv' INTO TABLE movie_keyword FIELDS TERMINATED BY ',';
+
+LOAD DATA LOCAL INFILE '/Users/olafrosendahl/Documents/GitHub/join-order-benchmark/csv_files/movie_link.csv' INTO TABLE movie_link FIELDS TERMINATED BY ',';
+
+LOAD DATA LOCAL INFILE '/Users/olafrosendahl/Documents/GitHub/join-order-benchmark/csv_files/name.csv' INTO TABLE name FIELDS TERMINATED BY ',';
+
+LOAD DATA LOCAL INFILE '/Users/olafrosendahl/Documents/GitHub/join-order-benchmark/csv_files/person_info.csv' INTO TABLE person_info FIELDS TERMINATED BY ',';
+
+LOAD DATA LOCAL INFILE '/Users/olafrosendahl/Documents/GitHub/join-order-benchmark/csv_files/role_type.csv' INTO TABLE role_type FIELDS TERMINATED BY ',';
+
+LOAD DATA LOCAL INFILE '/Users/olafrosendahl/Documents/GitHub/join-order-benchmark/csv_files/title.csv' INTO TABLE title FIELDS TERMINATED BY ',';
+
+LOAD DATA LOCAL INFILE '/Users/olafrosendahl/Documents/GitHub/join-order-benchmark/csv_files/movie_info.csv' INTO TABLE movie_info FIELDS TERMINATED BY ',';
