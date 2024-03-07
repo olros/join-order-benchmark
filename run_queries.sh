@@ -53,7 +53,7 @@ ANALYZE TABLE role_type;
 ANALYZE TABLE title;
 eof"
 
-thresholds=("32 32")
+thresholds=("32 32" "48 32" "64 32")
 max_levels=("20" "25" "30" "35" "40" "45")
 
 threshold_pairs=()
