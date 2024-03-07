@@ -53,30 +53,31 @@ ANALYZE TABLE role_type;
 ANALYZE TABLE title;
 eof"
 
-thresholds=("16" "24" "32" "40" "48")
+thresholds=("32 32")
+max_levels=("20" "25" "30" "35" "40" "45")
 
 threshold_pairs=()
 
-threshold_pairs+=("-1 -1") # Mapped to run without re-optimization
+threshold_pairs+=("-1 -1 -1") # Mapped to run without re-optimization
 
-for threshold_below in "${thresholds[@]}"; do
-  for threshold_above in "${thresholds[@]}"; do
-    threshold_pairs+=("$threshold_below $threshold_above")
+for threshold in "${thresholds[@]}"; do
+  for max_level in "${max_levels[@]}"; do
+    threshold_pairs+=("$threshold $max_level")
   done
 done
 
 for threshold in "${threshold_pairs[@]}"; do
-  read -r below above <<< "$threshold"
+  read -r below above max_level <<< "$threshold"
 
-  if [ $below -eq "-1" ] && [ $above -eq "-1" ]
+  if [ $below -eq "-1" ] && [ $above -eq "-1" ] && [ $max_level -eq "-1" ]
   then
     echo -e "${BIWhite}Starting benchmarking for baseline${NC}"
     run_reopt=false
     output_folder="${OUTDIR}baseline/"
   else
-    echo -e "${BIWhite}Starting benchmarking with thresholds: below: $below, above: $above${NC}"
+    echo -e "${BIWhite}Starting benchmarking with thresholds: below: $below, above: $above, max level: $max_level${NC}"
     run_reopt=true
-    output_folder="${OUTDIR}below_${below}_above_${above}/"
+    output_folder="${OUTDIR}below_${below}_above_${above}_level_${max_level}/"
   fi
 
   if [ ! -e $output_folder ]; then
@@ -86,7 +87,6 @@ for threshold in "${threshold_pairs[@]}"; do
   for file in `ls queries/*.sql`; do
     bname=`basename $file`
     name=${bname%.*}
-    outputmarkdown=$output_folder/$name.md
     outputjson=$output_folder/$name.json
     echo -e "${BIWhite}+-------------+${NC}"
     echo -e "${BIWhite}| Run $name.sql |${NC}"
@@ -96,7 +96,7 @@ for threshold in "${threshold_pairs[@]}"; do
     query=${original_query/";"/"\G"}
     if [ $run_reopt == true ]
     then
-      query=${query/"SELECT "/"SELECT /*+ SET_VAR(sql_buffer_result=1) RUN_REOPT($below, $above) */ "}
+      query=${query/"SELECT "/"SELECT /*+ SET_VAR(sql_buffer_result=1) RUN_REOPT($below, $above, $max_level) */ "}
     else
       query=${query/"SELECT "/"SELECT /*+ SET_VAR(sql_buffer_result=1) */ "}
     fi
@@ -112,7 +112,6 @@ for threshold in "${threshold_pairs[@]}"; do
       --warmup 2 \
       -r 10 \
       --export-json $outputjson \
-      --export-markdown $outputmarkdown \
       -n "job" "$mysql_connect -e \"$query\""
   done
 done
