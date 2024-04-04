@@ -4,9 +4,7 @@ import math
 import os
 import random
 
-import numpy as np
-
-folder_path = "./results/tests/with_level/"
+folder_path = "./results/tests/"
 json_files = glob.glob(os.path.join(folder_path, "*.json"))
 
 data = []
@@ -90,9 +88,8 @@ def calc_queries_in_relative_ranges():
 \caption{Caption}
 \\begin{tabularx}{\\textwidth}{l|l|l|l|l|l|l}
 \\toprule
-\\textbf{Schema} & \\textbf{< 1.2} & \\textbf{[1.2, 1.5)} & \\textbf{[1.5, 2)} & \\textbf{[2, 5)} & \\textbf{[5, 10)} & \\textbf{> 10} \\\ \midrule""")
+ & \\textbf{< 1.2} & \\textbf{[1.2, 1.5)} & \\textbf{[1.5, 2)} & \\textbf{[2, 5)} & \\textbf{[5, 10)} & \\textbf{> 10} \\\ \midrule""")
     for result in results:
-        # print(f"{result['dir']} & {' & '.join(result['ranges'])} \\\ \hline".replace('_', '\_'))
         print(f"{result['dir']} & {' & '.join(result['ranges'])} \\\ ".replace('below_', 'b').replace('_above_', '\_a').replace('_level_', '\_l'))
     print("""\\bottomrule
 \end{tabularx}
@@ -115,4 +112,4 @@ def most_speeded_up_query(dir: str):
 
 # calc_queries_in_relative_ranges()
     
-most_speeded_up_query("below_48_above_32_level_45")
+most_speeded_up_query("below_32_above_32_level_45")

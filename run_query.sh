@@ -26,7 +26,7 @@ SET PERSIST innodb_stats_auto_recalc = 0;
 SET GLOBAL optimizer_switch='hypergraph_optimizer=on';
 eof"
 
-analyze="$mysql_connect<<eof
+analyze="$mysql_connect<<eof > /dev/null
 ANALYZE TABLE aka_name;
 ANALYZE TABLE aka_title;
 ANALYZE TABLE cast_info;
@@ -64,7 +64,7 @@ echo -e "${BIWhite}+-------------+${NC}"
 
 BELOW_THRESHOLD=32
 ABOVE_THRESHOLD=32
-MAX_RELATIVE_LEVEL=40
+MAX_RELATIVE_LEVEL=45
 
 original_query=$(<$file)
 query=${original_query/";"/"\G"}

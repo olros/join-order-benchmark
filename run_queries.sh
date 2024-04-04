@@ -29,7 +29,7 @@ SET PERSIST innodb_stats_auto_recalc = 0;
 SET GLOBAL optimizer_switch='hypergraph_optimizer=on';
 eof"
 
-analyze="$mysql_connect<<eof
+analyze="$mysql_connect<<eof > /dev/null
 ANALYZE TABLE aka_name;
 ANALYZE TABLE aka_title;
 ANALYZE TABLE cast_info;
@@ -53,12 +53,12 @@ ANALYZE TABLE role_type;
 ANALYZE TABLE title;
 eof"
 
-thresholds=("32 32" "48 32" "64 32")
-max_levels=("20" "25" "30" "35" "40" "45")
+thresholds=("16 16" "32 32" "48 48" "64 64")
+max_levels=("30" "35" "40" "45" "50")
 
 threshold_pairs=()
 
-threshold_pairs+=("-1 -1 -1") # Mapped to run without re-optimization
+# threshold_pairs+=("-1 -1 -1") # Mapped to run without re-optimization
 
 for threshold in "${thresholds[@]}"; do
   for max_level in "${max_levels[@]}"; do
