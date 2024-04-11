@@ -50,6 +50,8 @@ ANALYZE TABLE role_type;
 ANALYZE TABLE title;
 eof"
 
+eval "$analyze"
+
 file="queries/${1:-"1a"}.sql"
 bname=`basename $file`
 name=${bname%.*}
@@ -72,10 +74,8 @@ query_without_reoptimization=${query/"SELECT "/"SELECT /*+ SET_VAR(sql_buffer_re
 query_with_reoptimization=${query/"SELECT "/"SELECT /*+ SET_VAR(sql_buffer_result=1) RUN_REOPT($BELOW_THRESHOLD, $ABOVE_THRESHOLD, $MAX_RELATIVE_LEVEL) */ "}
 
 hyperfine \
-  --prepare "eval $analyze" \
   --warmup 2 \
   -r 10 \
   --export-json $outputjson \
-  --export-markdown $outputmarkdown \
   -n "without_reoptimization" "$mysql_connect -e \"$query_without_reoptimization\"" \
   -n "with_reoptimization" "$mysql_connect -e \"$query_with_reoptimization\""

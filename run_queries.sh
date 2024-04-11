@@ -54,7 +54,7 @@ ANALYZE TABLE title;
 eof"
 
 thresholds=("16 16" "32 32" "48 48" "64 64")
-max_levels=("30" "35" "40" "45" "50")
+max_levels=("30" "40" "50" "60")
 
 threshold_pairs=()
 
@@ -84,6 +84,8 @@ for threshold in "${threshold_pairs[@]}"; do
     mkdir -p $output_folder
   fi
 
+  eval "$analyze"
+
   for file in `ls queries/*.sql`; do
     bname=`basename $file`
     name=${bname%.*}
@@ -108,7 +110,6 @@ for threshold in "${threshold_pairs[@]}"; do
     fi
 
     hyperfine \
-      --prepare "eval $analyze" \
       --warmup 2 \
       -r 10 \
       --export-json $outputjson \
