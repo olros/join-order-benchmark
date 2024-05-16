@@ -1,0 +1,424 @@
+{
+  "17d": [
+    "below_48_above_32_level_40",
+    "below_32_above_32_level_45",
+    "below_32_above_32_level_40",
+    "below_48_above_32_level_45",
+    "below_64_above_32_level_45"
+  ],
+  "14c": [
+    "below_48_above_32_level_40"
+  ],
+  "5b": [
+    "below_48_above_32_level_40",
+    "below_48_above_32_level_35",
+    "below_32_above_32_level_30",
+    "below_32_above_32_level_25",
+    "below_64_above_32_level_30",
+    "below_48_above_32_level_25",
+    "below_48_above_32_level_20",
+    "below_32_above_32_level_35",
+    "below_32_above_32_level_45",
+    "below_32_above_32_level_40",
+    "below_48_above_32_level_45",
+    "below_48_above_32_level_30",
+    "below_64_above_32_level_25",
+    "below_64_above_32_level_40",
+    "below_64_above_32_level_20",
+    "below_64_above_32_level_35",
+    "below_64_above_32_level_45",
+    "below_32_above_32_level_20"
+  ],
+  "28b": [
+    "below_48_above_32_level_40",
+    "below_48_above_32_level_35",
+    "below_32_above_32_level_30",
+    "below_32_above_32_level_25",
+    "below_64_above_32_level_30",
+    "below_48_above_32_level_25",
+    "below_32_above_32_level_35",
+    "below_32_above_32_level_45",
+    "below_32_above_32_level_40",
+    "below_48_above_32_level_45",
+    "below_48_above_32_level_30",
+    "below_64_above_32_level_25",
+    "below_64_above_32_level_40",
+    "below_64_above_32_level_35",
+    "below_64_above_32_level_45"
+  ],
+  "2b": [
+    "below_48_above_32_level_40",
+    "below_48_above_32_level_35",
+    "below_32_above_32_level_30",
+    "below_32_above_32_level_25",
+    "below_64_above_32_level_30",
+    "below_48_above_32_level_25",
+    "below_48_above_32_level_20",
+    "below_32_above_32_level_35",
+    "below_32_above_32_level_45",
+    "below_32_above_32_level_40",
+    "below_48_above_32_level_45",
+    "below_48_above_32_level_30",
+    "below_64_above_32_level_25",
+    "below_64_above_32_level_40",
+    "below_64_above_32_level_20",
+    "below_64_above_32_level_35",
+    "below_64_above_32_level_45",
+    "below_32_above_32_level_20"
+  ],
+  "2a": [
+    "below_48_above_32_level_40",
+    "below_48_above_32_level_35",
+    "below_32_above_32_level_30",
+    "below_32_above_32_level_25",
+    "below_64_above_32_level_30",
+    "below_48_above_32_level_25",
+    "below_48_above_32_level_20",
+    "below_32_above_32_level_35",
+    "below_32_above_32_level_45",
+    "below_32_above_32_level_40",
+    "below_48_above_32_level_45",
+    "below_48_above_32_level_30",
+    "below_64_above_32_level_25",
+    "below_64_above_32_level_40",
+    "below_64_above_32_level_20",
+    "below_64_above_32_level_35",
+    "below_64_above_32_level_45",
+    "below_32_above_32_level_20"
+  ],
+  "11d": [
+    "below_48_above_32_level_40",
+    "below_48_above_32_level_35",
+    "below_64_above_32_level_30",
+    "below_48_above_32_level_25",
+    "below_48_above_32_level_20",
+    "below_48_above_32_level_30",
+    "below_64_above_32_level_35"
+  ],
+  "6d": [
+    "below_48_above_32_level_40",
+    "below_48_above_32_level_35",
+    "below_32_above_32_level_35",
+    "below_32_above_32_level_45",
+    "below_32_above_32_level_40",
+    "below_48_above_32_level_45",
+    "below_64_above_32_level_40",
+    "below_64_above_32_level_35",
+    "below_64_above_32_level_45"
+  ],
+  "32a": [
+    "below_48_above_32_level_40",
+    "below_48_above_32_level_35",
+    "below_32_above_32_level_30",
+    "below_32_above_32_level_25",
+    "below_64_above_32_level_30",
+    "below_48_above_32_level_25",
+    "below_48_above_32_level_20",
+    "below_32_above_32_level_35",
+    "below_32_above_32_level_45",
+    "below_32_above_32_level_40",
+    "below_48_above_32_level_45",
+    "below_48_above_32_level_30",
+    "below_64_above_32_level_25",
+    "below_64_above_32_level_40",
+    "below_64_above_32_level_20",
+    "below_64_above_32_level_35",
+    "below_64_above_32_level_45",
+    "below_32_above_32_level_20"
+  ],
+  "22a": [
+    "below_48_above_32_level_40",
+    "below_32_above_32_level_30",
+    "below_32_above_32_level_25",
+    "below_64_above_32_level_30",
+    "below_48_above_32_level_20",
+    "below_48_above_32_level_30",
+    "below_64_above_32_level_25",
+    "below_64_above_32_level_20",
+    "below_32_above_32_level_20"
+  ],
+  "15b": [
+    "below_48_above_32_level_40",
+    "below_48_above_32_level_35",
+    "below_32_above_32_level_30",
+    "below_32_above_32_level_25",
+    "below_64_above_32_level_30",
+    "below_48_above_32_level_25",
+    "below_48_above_32_level_20",
+    "below_32_above_32_level_35",
+    "below_32_above_32_level_45",
+    "below_32_above_32_level_40",
+    "below_48_above_32_level_45",
+    "below_48_above_32_level_30",
+    "below_64_above_32_level_25",
+    "below_64_above_32_level_40",
+    "below_64_above_32_level_20",
+    "below_64_above_32_level_35",
+    "below_64_above_32_level_45",
+    "below_32_above_32_level_20"
+  ],
+  "28a": [
+    "below_48_above_32_level_40",
+    "below_48_above_32_level_35",
+    "below_32_above_32_level_30",
+    "below_32_above_32_level_25",
+    "below_64_above_32_level_30",
+    "below_48_above_32_level_25",
+    "below_32_above_32_level_35",
+    "below_32_above_32_level_45",
+    "below_32_above_32_level_40",
+    "below_48_above_32_level_45",
+    "below_48_above_32_level_30",
+    "below_64_above_32_level_25",
+    "below_64_above_32_level_40",
+    "below_64_above_32_level_35",
+    "below_64_above_32_level_45",
+    "below_32_above_32_level_20"
+  ],
+  "24b": [
+    "below_48_above_32_level_40",
+    "below_48_above_32_level_35",
+    "below_32_above_32_level_30",
+    "below_32_above_32_level_25",
+    "below_64_above_32_level_30",
+    "below_48_above_32_level_25",
+    "below_48_above_32_level_20",
+    "below_32_above_32_level_35",
+    "below_32_above_32_level_45",
+    "below_32_above_32_level_40",
+    "below_48_above_32_level_45",
+    "below_48_above_32_level_30",
+    "below_64_above_32_level_25",
+    "below_64_above_32_level_40",
+    "below_64_above_32_level_20",
+    "below_64_above_32_level_35",
+    "below_64_above_32_level_45",
+    "below_32_above_32_level_20"
+  ],
+  "18a": [
+    "below_48_above_32_level_40",
+    "below_48_above_32_level_35",
+    "below_32_above_32_level_30",
+    "below_32_above_32_level_25",
+    "below_64_above_32_level_30",
+    "below_48_above_32_level_25",
+    "below_48_above_32_level_20",
+    "below_32_above_32_level_35",
+    "below_32_above_32_level_45",
+    "below_32_above_32_level_40",
+    "below_48_above_32_level_45",
+    "below_48_above_32_level_30",
+    "below_64_above_32_level_25",
+    "below_64_above_32_level_40",
+    "below_64_above_32_level_20",
+    "below_64_above_32_level_35",
+    "below_64_above_32_level_45",
+    "below_32_above_32_level_20"
+  ],
+  "5a": [
+    "below_48_above_32_level_40",
+    "below_48_above_32_level_35",
+    "below_32_above_32_level_30",
+    "below_32_above_32_level_25",
+    "below_64_above_32_level_30",
+    "below_48_above_32_level_25",
+    "below_48_above_32_level_20",
+    "below_32_above_32_level_35",
+    "below_32_above_32_level_45",
+    "below_32_above_32_level_40",
+    "below_48_above_32_level_45",
+    "below_48_above_32_level_30",
+    "below_64_above_32_level_25",
+    "below_64_above_32_level_40",
+    "below_64_above_32_level_20",
+    "below_64_above_32_level_35",
+    "below_64_above_32_level_45",
+    "below_32_above_32_level_20"
+  ],
+  "25c": [
+    "below_48_above_32_level_40",
+    "below_48_above_32_level_35",
+    "below_32_above_32_level_45",
+    "below_64_above_32_level_40"
+  ],
+  "5c": [
+    "below_48_above_32_level_40",
+    "below_48_above_32_level_35",
+    "below_32_above_32_level_30",
+    "below_32_above_32_level_25",
+    "below_64_above_32_level_30",
+    "below_48_above_32_level_25",
+    "below_48_above_32_level_20",
+    "below_32_above_32_level_35",
+    "below_32_above_32_level_45",
+    "below_32_above_32_level_40",
+    "below_48_above_32_level_45",
+    "below_48_above_32_level_30",
+    "below_64_above_32_level_25",
+    "below_64_above_32_level_40",
+    "below_64_above_32_level_20",
+    "below_64_above_32_level_35",
+    "below_64_above_32_level_45",
+    "below_32_above_32_level_20"
+  ],
+  "28c": [
+    "below_48_above_32_level_40",
+    "below_48_above_32_level_35",
+    "below_32_above_32_level_30",
+    "below_32_above_32_level_25",
+    "below_64_above_32_level_30",
+    "below_32_above_32_level_40",
+    "below_48_above_32_level_45",
+    "below_48_above_32_level_30",
+    "below_64_above_32_level_40",
+    "below_64_above_32_level_35"
+  ],
+  "13a": [
+    "below_48_above_32_level_35",
+    "below_32_above_32_level_40",
+    "below_64_above_32_level_35",
+    "below_32_above_32_level_20"
+  ],
+  "20a": [
+    "below_48_above_32_level_35",
+    "below_32_above_32_level_30",
+    "below_64_above_32_level_30",
+    "below_32_above_32_level_35",
+    "below_32_above_32_level_40",
+    "below_48_above_32_level_30",
+    "below_64_above_32_level_35"
+  ],
+  "22d": [
+    "below_48_above_32_level_35"
+  ],
+  "20b": [
+    "below_48_above_32_level_35",
+    "below_32_above_32_level_30",
+    "below_64_above_32_level_30",
+    "below_32_above_32_level_35",
+    "below_32_above_32_level_40",
+    "below_64_above_32_level_35"
+  ],
+  "1d": [
+    "below_48_above_32_level_35"
+  ],
+  "20c": [
+    "below_48_above_32_level_35",
+    "below_32_above_32_level_30",
+    "below_64_above_32_level_30",
+    "below_32_above_32_level_35",
+    "below_32_above_32_level_40",
+    "below_48_above_32_level_30",
+    "below_64_above_32_level_35"
+  ],
+  "1c": [
+    "below_32_above_32_level_30",
+    "below_64_above_32_level_30",
+    "below_48_above_32_level_20",
+    "below_32_above_32_level_45",
+    "below_32_above_32_level_40",
+    "below_48_above_32_level_30",
+    "below_64_above_32_level_20",
+    "below_64_above_32_level_35",
+    "below_64_above_32_level_45"
+  ],
+  "7b": [
+    "below_32_above_32_level_30",
+    "below_32_above_32_level_25",
+    "below_32_above_32_level_45",
+    "below_64_above_32_level_40",
+    "below_64_above_32_level_20"
+  ],
+  "7c": [
+    "below_32_above_32_level_30",
+    "below_32_above_32_level_40",
+    "below_48_above_32_level_30"
+  ],
+  "24a": [
+    "below_32_above_32_level_30",
+    "below_32_above_32_level_35",
+    "below_32_above_32_level_45",
+    "below_32_above_32_level_40"
+  ],
+  "31b": [
+    "below_32_above_32_level_30",
+    "below_32_above_32_level_25",
+    "below_64_above_32_level_30",
+    "below_48_above_32_level_25",
+    "below_48_above_32_level_20",
+    "below_48_above_32_level_45",
+    "below_64_above_32_level_20"
+  ],
+  "11b": [
+    "below_32_above_32_level_25",
+    "below_32_above_32_level_35"
+  ],
+  "1b": [
+    "below_32_above_32_level_25"
+  ],
+  "26c": [
+    "below_64_above_32_level_30"
+  ],
+  "16d": [
+    "below_64_above_32_level_30"
+  ],
+  "16b": [
+    "below_64_above_32_level_30",
+    "below_64_above_32_level_25"
+  ],
+  "16a": [
+    "below_64_above_32_level_30"
+  ],
+  "8c": [
+    "below_48_above_32_level_20",
+    "below_48_above_32_level_30"
+  ],
+  "7a": [
+    "below_32_above_32_level_35",
+    "below_48_above_32_level_45",
+    "below_64_above_32_level_25",
+    "below_64_above_32_level_45"
+  ],
+  "19c": [
+    "below_32_above_32_level_35",
+    "below_32_above_32_level_45",
+    "below_32_above_32_level_40"
+  ],
+  "13c": [
+    "below_32_above_32_level_35",
+    "below_48_above_32_level_30"
+  ],
+  "9c": [
+    "below_32_above_32_level_45",
+    "below_32_above_32_level_40"
+  ],
+  "26b": [
+    "below_32_above_32_level_45",
+    "below_64_above_32_level_45"
+  ],
+  "26a": [
+    "below_32_above_32_level_40",
+    "below_48_above_32_level_30",
+    "below_64_above_32_level_25",
+    "below_64_above_32_level_40"
+  ],
+  "22b": [
+    "below_48_above_32_level_45"
+  ],
+  "12c": [
+    "below_64_above_32_level_40",
+    "below_32_above_32_level_20"
+  ],
+  "29c": [
+    "below_64_above_32_level_45"
+  ],
+  "13b": [
+    "below_32_above_32_level_20"
+  ],
+  "1a": [
+    "below_32_above_32_level_20"
+  ],
+  "15a": [
+    "below_32_above_32_level_20"
+  ]
+}
