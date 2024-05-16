@@ -64,9 +64,9 @@ echo -e "${BIWhite}+-------------+${NC}"
 echo -e "${BIWhite}| Run $name.sql |${NC}"
 echo -e "${BIWhite}+-------------+${NC}"
 
-BELOW_THRESHOLD=32
+BELOW_THRESHOLD=128
 ABOVE_THRESHOLD=32
-MAX_RELATIVE_LEVEL=45
+MAX_RELATIVE_LEVEL=50
 
 original_query=$(<$file)
 query=${original_query/";"/"\G"}
