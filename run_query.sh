@@ -26,7 +26,7 @@ SET PERSIST innodb_stats_auto_recalc = 0;
 SET GLOBAL optimizer_switch='hypergraph_optimizer=on';
 eof"
 
-analyze="$mysql_connect<<eof
+analyze="$mysql_connect<<eof > /dev/null
 ANALYZE TABLE aka_name;
 ANALYZE TABLE aka_title;
 ANALYZE TABLE cast_info;
@@ -50,6 +50,8 @@ ANALYZE TABLE role_type;
 ANALYZE TABLE title;
 eof"
 
+eval "$analyze"
+
 file="queries/${1:-"1a"}.sql"
 bname=`basename $file`
 name=${bname%.*}
@@ -62,19 +64,18 @@ echo -e "${BIWhite}+-------------+${NC}"
 echo -e "${BIWhite}| Run $name.sql |${NC}"
 echo -e "${BIWhite}+-------------+${NC}"
 
-BELOW_THRESHOLD=64
+BELOW_THRESHOLD=128
 ABOVE_THRESHOLD=32
+MAX_RELATIVE_LEVEL=50
 
 original_query=$(<$file)
 query=${original_query/";"/"\G"}
 query_without_reoptimization=${query/"SELECT "/"SELECT /*+ SET_VAR(sql_buffer_result=1) */ "}
-query_with_reoptimization=${query/"SELECT "/"SELECT /*+ SET_VAR(sql_buffer_result=1) RUN_REOPT($BELOW_THRESHOLD, $ABOVE_THRESHOLD) */ "}
+query_with_reoptimization=${query/"SELECT "/"SELECT /*+ SET_VAR(sql_buffer_result=1) RUN_REOPT($BELOW_THRESHOLD, $ABOVE_THRESHOLD, $MAX_RELATIVE_LEVEL) */ "}
 
 hyperfine \
-  --prepare "eval $analyze" \
   --warmup 2 \
   -r 10 \
   --export-json $outputjson \
-  --export-markdown $outputmarkdown \
   -n "without_reoptimization" "$mysql_connect -e \"$query_without_reoptimization\"" \
   -n "with_reoptimization" "$mysql_connect -e \"$query_with_reoptimization\""
