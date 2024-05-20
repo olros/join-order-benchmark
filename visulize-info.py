@@ -868,39 +868,25 @@ def amount_worse_or_better_compared_to_baseline(data, name, save=False, save_nam
 
     percentage_diffs = []
     for baseline, query_result in zip(baselines, results):
-        query_percentage_diff = [(query_result - baseline) / baseline * 100]
+        query_percentage_diff = [(query_result) / baseline]
         percentage_diffs.extend(query_percentage_diff)
 
     bins = [
-        -np.inf,
-        -2.2,
-        -2.0,
-        -1.8,
-        -1.6,
-        -1.4,
-        -0.2,
-        0.2,
-        0.4,
-        0.6,
-        0.8,
-        1.0,
-        1.2,
+        0,
+        0.5,
+        0.9,
+        1.1,
+        1.5,
+        2,
         np.inf,
     ]
     bin_labels = [
-        "1.2x or slower",
-        "1.0x to 0.8x slower",
-        "0.8x to 0.6x slower",
-        "0.6x to 0.4x slower",
-        "0.4x to 0.2x slower",
-        "0.2x to 0.2x faster",
-        "0.2x to 0.4x faster",
-        "0.4x to 0.6x faster",
-        "0.6x to 0.8x faster",
-        "0.8x to 1.0x faster",
-        "1.0x to 1.2x faster",
-        "1.2x to 1.4x faster",
-        "1.4x or faster",
+        "> 50% improvement",
+        "10% to 50% improvement",
+        "Unchanged",
+        "10% to 50% degradation",
+        "50% to 100% degradation",
+        "> 100% degradation",
     ]
 
     if save:
@@ -920,8 +906,8 @@ def amount_worse_or_better_compared_to_baseline(data, name, save=False, save_nam
     sns.barplot(x=unique_bins, y=counts[counts > 0], color="skyblue")
 
     # Customize plot labels and title
-    plt.xlabel("Percentage Difference from Baseline", fontsize=fontsize)
-    plt.ylabel("Count", fontsize=fontsize)
+    plt.xlabel("", fontsize=fontsize)
+    plt.ylabel("Number of queries", fontsize=fontsize)
     plt.yticks(fontsize=fontsize)
     plt.title("Distribution of Results Compared to Baseline", fontsize=fontsize)
 
@@ -941,7 +927,7 @@ def amount_worse_or_better_compared_to_baseline(data, name, save=False, save_nam
             (
                 f"./images/{save_name}/amount-worse-and-better.eps"
                 if save_name
-                else f"./images/{name}/amount-worse-and-better.eps"
+                else f"./images/amount-worse-and-better-{name}.eps"
             ),
             format="eps",
             bbox_inches="tight",
@@ -1110,18 +1096,18 @@ def shortn_command_name(name):
 
 
 data_dir = "./results/tests/thesis/"
-all_commands = get_all_command_variants(data_dir)
+all_commands = get_all_command_variants(data_dir, shortn_command_name)
 
 
-name = "512_32_50"
+name = "32_32_50"
 data = create_compare_df(all_commands, name)
 
-generate_attachments(all_commands, data_dir)
+# generate_attachments(all_commands, data_dir)
 
-side_plot_quries_together_for_each_command(all_commands, True)
-# amount_worse_or_better_compared_to_baseline(all_commands, name, True)
+# side_plot_quries_together_for_each_command(all_commands, True)
+amount_worse_or_better_compared_to_baseline(all_commands, name, True)
 # count_worse_or_better_compared_to_baseline(all_commands, name, True)
-# side_plot_all(data, True, name)
+# # side_plot_all(data, True, name)
 # side_plot_quries_together_for_each_command_without_n_fastest_and_slowest(
 #     all_commands, 20
 # )
